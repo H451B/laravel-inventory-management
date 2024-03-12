@@ -54,7 +54,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single','crud_error'],
             'ignore_exceptions' => false,
         ],
 
@@ -125,6 +125,12 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+
+        'crud_error' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/crud_error.log'), // Define the path where you want to store the logs
+            'level' => 'error', // Set the log level (e.g., error, debug, info)
         ],
     ],
 
