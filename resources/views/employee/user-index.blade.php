@@ -1,13 +1,13 @@
-<x-layouts.master title="Role">
+<x-layouts.master title="Employee">
     <div class="row d-flex justify-content-center">
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header bg-primary">
                     <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Roles</h3>
-                        @can('role-create')
-                            <a class="btn btn-light" href="{{ route('roles.create') }}">
-                                Create Role
+                        <h3 class="card-title">Employees</h3>
+                        @can('user-create')
+                            <a class="btn btn-light" href="{{ route('users.create') }}">
+                                Create Employee
                             </a>
                         @endcan
                     </div>
@@ -19,51 +19,42 @@
                         <thead>
                             <tr>
                                 <th>Sl</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
                                 <th>Role</th>
-                                <th>Permission</th>
-                                <th>Users</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($roles as $role)
-
+                            @forelse ($users as $user)
                                 <tr style="max-height: 130px">
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->phone }}</td>
                                     <td>
-                                        @if ($role->name == 'Super Admin')
-                                            <span class="badge rounded-pill text-bg-primary">all</span>
-                                        @else
-                                            @foreach ($role->permissions as $permission)
-                                                <span
-                                                    class="badge rounded-pill text-bg-primary">{{ $permission->name }}</span>
-                                            @endforeach
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @foreach ($role->users as $user)
-                                        <span class="badge rounded-pill text-bg-success">{{ $user->name }}</span>
+                                        @foreach ($user->roles as $role)
+                                            <span class="badge rounded-pill text-bg-success">{{ $role->name }}</span>
                                         @endforeach
                                     </td>
-
                                     <td>
-                                        <form action="{{ route('roles.destroy', $role->id) }}" method="post">
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
 
-                                            {{-- <a href="{{ route('roles.show', $role->id) }}"
-                                                class="btn btn-warning btn-sm"><i class="bi bi-eye"></i> Show</a> --}}
+                                            @if ($user->name != 'Super Admin')
+                                                <a href="{{ route('users.show', $user->id) }}"
+                                                    class="btn btn-warning btn-sm"><i class="bi bi-eye"></i> Show</a>
 
-                                            @if ($role->name != 'Super Admin')
-                                                @can('role-edit')
-                                                    <a href="{{ route('roles.edit', $role->id) }}"
+                                                @can('user-edit')
+                                                    <a href="{{ route('users.edit', $user->id) }}"
                                                         class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i>
                                                         Edit</a>
                                                 @endcan
 
-                                                @can('role-delete')
-                                                    @if ($role->name != Auth::user()->hasRole($role->name))
+                                                @can('user-delete')
+                                                    @if ($user->name != Auth::user()->hasRole($user->name))
                                                         <button type="submit" class="btn btn-danger btn-sm"
                                                             onclick="return confirm('Do you want to delete this role?');"><i
                                                                 class="bi bi-trash"></i> Delete</button>

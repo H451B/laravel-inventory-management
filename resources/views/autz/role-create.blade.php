@@ -19,27 +19,27 @@
                     <div class="col-sm-9">
                         <input style="background: whitesmoke" type="text" name="name" class="form-control"
                             placeholder="New Role" id="name">
-                            @error('name')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                        @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
-                <div class="mb-3">
-                    <div class="row">
-                        <p class="m-0"><strong>Grant Permission</strong></p>
+                <div class="row mb-3">
+                    <p class="m-0"><strong>Grant Permission</strong></p>
+                    @forelse ($groupedPermissions as $type => $permissions)
                         <div class="col-sm-2 shadow-sm m-3 p-3 bg-body-tertiary rounded">
-                            @foreach ($groupedPermissions as $type => $permissions)
-                                <p><strong>{{ ucfirst($type) }}:</strong></p>
-                                @foreach ($permissions as $permission)
-                                    <input type="checkbox" name="permissions[]" value="{{ $permission->id }}">
-                                    {{ $permission->name }}<br>
-                                @endforeach
+                            <p><strong>{{ ucfirst($type) }}:</strong></p>
+                            @foreach ($permissions as $permission)
+                                <input type="checkbox" name="permissions[]" value="{{ $permission->id }}">
+                                {{ $permission->name }}<br>
                             @endforeach
-                            @error('permissions')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
                         </div>
-                    </div>
+                    @empty
+                        <p>No Data</p>
+                    @endforelse
+                    @error('permissions')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary float-end">Submit</button>
             </form>

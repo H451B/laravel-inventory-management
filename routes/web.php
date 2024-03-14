@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,11 +33,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
 });
 
-Route::group(['middleware' => ['role:Super Admin| Admin']], function () {
-    Route::resource('roles', RoleController::class);
-});
+// Route::group(['middleware' => ['role:Super Admin| Admin']], function () {
+//     Route::resource('roles', RoleController::class);
+//     Route::resource('users', UserController::class);
+// });
 
 // Route::group(['middleware' => ['role:super-admin|writer']], function () {
 //     //

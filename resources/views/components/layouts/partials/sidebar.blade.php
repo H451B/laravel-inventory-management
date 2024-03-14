@@ -45,20 +45,23 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                @if(auth()->user()->hasRole(['Super Admin', 'admin']))
-                <li class="nav-item {{ request()->routeIs('roles.index') ? 'menu-open' : '' }}">
-                    <a href="{{ route('roles.index') }}" class="nav-link {{ request()->routeIs('roles.index') ? 'active' : '' }}">
+                @canany(['role-create','role-delete','role-edit','role-list'])
+                <li class="nav-item {{ Str::startsWith(request()->url(), url('roles')) ? 'menu-open' : '' }}">
+                    <a href="{{ route('roles.index') }}" class="nav-link {{ Str::startsWith(request()->url(), url('roles')) ? 'active' : '' }}">
                         <i class="fas fa-fire nav-icon"></i>
                         <p>Roles & Permission</p>
                     </a>
-                </li>
+                </li>                
                 @endif
-                <li class="nav-item">
-                    <a href="./index3.html" class="nav-link">
+
+                @canany(['user-create','user-delete','user-edit','user-list'])
+                <li class="nav-item {{ Str::startsWith(request()->url(), url('users')) ? 'menu-open' : '' }}">
+                    <a href="{{route('users.index')}}" class="nav-link {{ Str::startsWith(request()->url(), url('users')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user-friends"></i>
                         <p>Employee</p>
                     </a>
-                </li>
+                </li>    
+                @endcanany
 
                 {{-- Treeview --}}
                 {{-- <li class="nav-item">

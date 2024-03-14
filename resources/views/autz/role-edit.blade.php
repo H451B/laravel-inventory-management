@@ -28,19 +28,19 @@
                 <div class="mb-3">
                     <div class="row">
                         <p class="m-0"><strong>Granted Permissions</strong></p>
+                        @foreach ($groupedPermissions as $type => $permissions)
                         <div class="col-sm-2 shadow-sm m-3 p-3 bg-body-tertiary rounded">
-                            @foreach ($groupedPermissions as $type => $permissions)
                                 <p><strong>{{ ucfirst($type) }}:</strong></p>
                                 @foreach ($permissions as $permission)
                                     <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"
                                         {{ in_array($permission->id, $rolePermissions ?? []) ? 'checked' : '' }}>
                                     {{ $permission->name }}<br>
                                 @endforeach
+                            </div>
                             @endforeach
                             @error('permissions')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
-                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary float-end">Update</button>
