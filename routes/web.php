@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Product\ProductAttributeController;
+use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SupplierController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +39,18 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    Route::resource('suppliers', SupplierController::class);
+    Route::resource('products', ProductController::class);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('product-attributes', [ProductAttributeController::class, 'index'])->name('product.attributes.index');
+    Route::post('product-categories', [ProductAttributeController::class, 'storeCategory'])->name('product.categories.store');
+    Route::post('product-types', [ProductAttributeController::class, 'storeType'])->name('product.types.store');
+    Route::put('product-categories/{productCategory}', [ProductAttributeController::class, 'updateCategory'])->name('product.categories.update');
+    Route::put('product-types/{productType}', [ProductAttributeController::class, 'updateType'])->name('product.types.update');
+    Route::delete('product-categories/{productCategory}', [ProductAttributeController::class, 'destroyCategory'])->name('product.categories.destroy');
+    Route::delete('product-types/{productType}', [ProductAttributeController::class, 'destroyType'])->name('product.types.destroy');
 });
 
 // Route::group(['middleware' => ['role:Super Admin| Admin']], function () {
