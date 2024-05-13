@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Product\ProductCategory;
+use App\Models\Purchase\Supplier;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,10 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_types', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(ProductCategory::class)->constrained()->onDelete('cascade');;
-            $table->string('name');
+            $table->string('purchase_code');
+            $table->foreignIdFor(Supplier::class)->constrained();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_types');
+        Schema::dropIfExists('purchases');
     }
 };

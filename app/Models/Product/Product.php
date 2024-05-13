@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Models\Purchase\Purchase;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,5 +37,10 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(ProductImage::class);
+    }
+
+    public function purchases()
+    {
+        return $this->belongsToMany(Purchase::class)->withTimestamps();
     }
 }

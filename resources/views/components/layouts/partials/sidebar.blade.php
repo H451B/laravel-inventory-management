@@ -106,6 +106,24 @@
                     </li>
                 @endcanany
 
+                @canany(['purchase-create', 'purchase-delete', 'purchase-edit', 'purchase-list'])
+                <li class="nav-item {{ Str::startsWith(request()->url(), url('purchases')) ? 'menu-open' : '' }}">
+                    <a href="{{route('purchases.index')}}" class="nav-link {{ Str::startsWith(request()->url(), url('purchases')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-user-friends"></i>
+                        <p>Purchase</p>
+                    </a>
+                </li>    
+                @endcanany
+
+                {{-- @canany(['sale-create', 'sale-delete', 'sale-edit', 'sale-list'])
+                <li class="nav-item {{ Str::startsWith(request()->url(), url('sales')) ? 'menu-open' : '' }}">
+                    <a href="{{route('sales.index')}}" class="nav-link {{ Str::startsWith(request()->url(), url('sales')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-user-friends"></i>
+                        <p>Sale</p>
+                    </a>
+                </li>    
+                @endcanany --}}
+
                 {{-- @canany(['customer-create', 'customer-delete', 'customer-edit', 'customer-list'])
                 <li class="nav-item {{ Str::startsWith(request()->url(), url('customers')) ? 'menu-open' : '' }}">
                     <a href="{{route('customers.index')}}" class="nav-link {{ Str::startsWith(request()->url(), url('customers')) ? 'active' : '' }}">

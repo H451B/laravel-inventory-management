@@ -38,6 +38,10 @@ class PermissionSeeder extends Seeder
             // 'product-type-create',
             // 'product-type-edit',
             // 'product-type-delete',
+            // 'purchase-list',
+            // 'purchase-create',
+            // 'purchase-edit',
+            // 'purchase-delete',
 
         ];
 

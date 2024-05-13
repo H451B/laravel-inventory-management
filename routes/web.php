@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Product\ProductAttributeController;
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SupplierController;
@@ -41,6 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('suppliers', SupplierController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('purchases', PurchaseController::class);
+    // Route::resource('sales', SaleController::class);
 });
 
 Route::middleware('auth')->group(function () {

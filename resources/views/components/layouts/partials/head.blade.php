@@ -13,9 +13,14 @@
     <link rel="stylesheet" href="{{asset('ui/backend/dist/css/adminlte.min.css')}}">
     <!-- bootstrap5.3 -->
     <link rel="stylesheet" href="{{asset('ui/backend/dist/css/bootstrap53.min.css')}}">
-    {{-- DataTables --}}
+    <!-- select 2 -->
+    <link rel="stylesheet" href="{{asset('ui/backend/dist/css/select2.min.css')}}">
+    <!-- <script src="{{ asset('ui/backend/dist/js/select2.min.js') }}"></script> -->
+    <!-- {{-- DataTables --}} -->
     <link rel="stylesheet" href="{{asset('ui/backend/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('ui/backend/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('ui/backend/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('ui/backend/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+
+    <script src="{{ asset('ui/backend/plugins/jquery/jquery.min.js') }}"></script>
   </head>
